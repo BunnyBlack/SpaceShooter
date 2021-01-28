@@ -1,15 +1,21 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 
 
 namespace Core.Player
 {
     public class Player : MonoBehaviour
     {
-        public float Speed { get; set; } = 5f;
+        public float Speed
+        {
+            get { return _speed; }
+            set { _speed = value; }
+        }
+
+
+        [SerializeField] private float _speed = 5f;
+        [SerializeField] private GameObject _laserPrefeb;
+        [SerializeField] private float _coolDown = 0.15f;
+        private float _canFire;
 
         private float _horizontalInput;
         private float _verticalInput;
@@ -26,6 +32,21 @@ namespace Core.Player
         private void Update()
         {
             Move();
+
+            if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+            {
+                Shoot();
+            }
+
+        }
+
+        private void Shoot()
+        {
+            _canFire = Time.time + _coolDown;
+
+            var curPosition = gameObject.transform.position;
+            var laserInitPosition = new Vector3(curPosition.x, curPosition.y + 0.8f, curPosition.z);
+            Instantiate(_laserPrefeb, laserInitPosition, Quaternion.identity);
         }
 
         private void InitPosition()
@@ -48,7 +69,7 @@ namespace Core.Player
             var curPosition = gameObject.transform.position;
             gameObject.transform.position = new Vector3(curPosition.x,
                 Mathf.Clamp(curPosition.y, BottomBoarder, TopBoarder), 0);
-            
+
             if (gameObject.transform.position.x < LeftBoarder)
             {
                 gameObject.transform.position = new Vector3(RightBoarder, curPosition.y, 0);
