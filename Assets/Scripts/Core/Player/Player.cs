@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,8 +10,16 @@ namespace Core.Player
 {
     public class Player : MonoBehaviour
     {
-        public float Speed { get; set; } = 5f;
+        public float Speed
+        {
+            get { return _speed; }
+            set { _speed = value; }
+        }
 
+        
+        [SerializeField] private float _speed = 5f;
+        [SerializeField] private GameObject _laserPrefeb;
+        
         private float _horizontalInput;
         private float _verticalInput;
         private const float TopBoarder = 0f;
@@ -26,6 +35,16 @@ namespace Core.Player
         private void Update()
         {
             Move();
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Shoot();
+            }
+        }
+
+        private void Shoot()
+        {
+            Instantiate(_laserPrefeb, gameObject.transform.position, Quaternion.identity);
         }
 
         private void InitPosition()
