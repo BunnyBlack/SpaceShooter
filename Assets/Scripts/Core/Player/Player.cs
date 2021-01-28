@@ -44,7 +44,9 @@ namespace Core.Player
 
         private void Shoot()
         {
-            Instantiate(_laserPrefeb, gameObject.transform.position, Quaternion.identity);
+            var curPosition = gameObject.transform.position;
+            var laserInitPosition = new Vector3(curPosition.x, curPosition.y + 0.8f, curPosition.z);
+            Instantiate(_laserPrefeb, laserInitPosition, Quaternion.identity);
         }
 
         private void InitPosition()
