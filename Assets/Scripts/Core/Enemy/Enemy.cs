@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Core.Enemy
 {
@@ -31,6 +32,22 @@ namespace Core.Enemy
         private void MoveDown()
         {
             gameObject.transform.Translate(Vector3.down * (_speed * Time.deltaTime));
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            switch (other.tag)
+            {
+                case "Player":
+                    Debug.Log("Damage the player");
+                    Destroy(gameObject);
+                    break;
+                case "Laser":
+                    Debug.Log("Hit by laser");
+                    Destroy(other.gameObject);
+                    Destroy(gameObject);
+                    break;
+            }
         }
     }
 }
