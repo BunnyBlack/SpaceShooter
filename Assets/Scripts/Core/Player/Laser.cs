@@ -12,11 +12,6 @@ namespace Core.Player
             set { _speed = value; }
         }
 
-        private void Start()
-        {
-            Debug.Log(gameObject.transform.position.y);
-        }
-
         private void Update()
         {
             Move();
