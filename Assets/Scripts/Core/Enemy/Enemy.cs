@@ -5,7 +5,7 @@ namespace Core.Enemy
 {
     public class Enemy : MonoBehaviour
     {
-        private float _speed = 4f;
+        [SerializeField] private float _speed = 4f;
 
         private const float BottomBoarder = -5.5f;
         private const float TopBoarder = 7f;
