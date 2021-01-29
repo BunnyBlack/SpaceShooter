@@ -39,7 +39,7 @@ namespace Core.Enemy
             switch (other.tag)
             {
                 case "Player":
-                    Debug.Log("Damage the player");
+                    other.gameObject.GetComponent<Player.Player>()?.Damaged();
                     Destroy(gameObject);
                     break;
                 case "Laser":

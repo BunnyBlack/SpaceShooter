@@ -15,6 +15,7 @@ namespace Core.Player
         [SerializeField] private float _speed = 5f;
         [SerializeField] private GameObject _laserPrefeb;
         [SerializeField] private float _coolDown = 0.15f;
+        [SerializeField] private int _lives = 3;
         private float _canFire;
 
         private float _horizontalInput;
@@ -38,6 +39,18 @@ namespace Core.Player
                 Shoot();
             }
 
+        }
+
+        public void Damaged()
+        {
+            _lives--;
+
+            Debug.Log($"Live:{_lives}");
+            if (_lives >= 1)
+                return;
+
+            Debug.Log("Oops, I'm defeated");
+            Destroy(gameObject);
         }
 
         private void Shoot()
