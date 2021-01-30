@@ -6,6 +6,7 @@ namespace Core.Enemy
     public class SpawnManager : MonoBehaviour
     {
         [SerializeField] private GameObject _enemyPrefeb;
+        [SerializeField] private GameObject _enemyContainer;
         [SerializeField] private int _maxNum = 5;
 
         private int _curNum;
@@ -20,14 +21,13 @@ namespace Core.Enemy
         {
             while (true)
             {
+                if (_enemyPrefeb != null && _curNum < _maxNum)
+                {
+                    var enemy = Instantiate(_enemyPrefeb, _enemyContainer.transform, false);
+                    enemy.GetComponent<Enemy>()?.ReSpawn();
+                    _curNum++;
+                }
                 yield return new WaitForSeconds(5);
-
-                if (_enemyPrefeb == null || _curNum >= _maxNum)
-                    continue;
-
-                var enemy = Instantiate(_enemyPrefeb);
-                enemy.GetComponent<Enemy>()?.ReSpawn();
-                _curNum++;
             }
         }
     }
