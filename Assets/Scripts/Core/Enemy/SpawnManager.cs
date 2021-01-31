@@ -7,14 +7,13 @@ namespace Core.Enemy
     {
         [SerializeField] private GameObject _enemyPrefeb;
         [SerializeField] private GameObject _enemyContainer;
-        [SerializeField] private int _maxNum = 5;
 
-        private int _curNum;
         private bool _stopSpawning;
+        private bool _isEnemyPrefebNotNull;
 
         private void Start()
         {
-            _curNum = 0;
+            _isEnemyPrefebNotNull = _enemyPrefeb != null;
             StartCoroutine(Spawn());
         }
 
@@ -22,11 +21,10 @@ namespace Core.Enemy
         {
             while (!_stopSpawning)
             {
-                if (_enemyPrefeb != null && _curNum < _maxNum)
+                if (_isEnemyPrefebNotNull)
                 {
                     var enemy = Instantiate(_enemyPrefeb, _enemyContainer.transform, false);
                     enemy.GetComponent<Enemy>()?.ReSpawn();
-                    _curNum++;
                 }
                 yield return new WaitForSeconds(5);
             }
