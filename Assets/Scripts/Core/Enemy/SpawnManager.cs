@@ -10,6 +10,7 @@ namespace Core.Enemy
         [SerializeField] private int _maxNum = 5;
 
         private int _curNum;
+        private bool _stopSpawning;
 
         private void Start()
         {
@@ -19,7 +20,7 @@ namespace Core.Enemy
 
         private IEnumerator Spawn()
         {
-            while (true)
+            while (!_stopSpawning)
             {
                 if (_enemyPrefeb != null && _curNum < _maxNum)
                 {
@@ -29,6 +30,12 @@ namespace Core.Enemy
                 }
                 yield return new WaitForSeconds(5);
             }
+        }
+
+        public void OnPlayerDeath()
+        {
+            _stopSpawning = true;
+            Debug.Log("Oops, I'm defeated.");
         }
     }
 }
