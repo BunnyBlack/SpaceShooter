@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Core.Enemy;
+using UnityEngine;
 
 
 namespace Core.Player
@@ -16,7 +17,6 @@ namespace Core.Player
         [SerializeField] private GameObject _laserPrefeb;
         [SerializeField] private float _coolDown = 0.15f;
         [SerializeField] private int _lives = 3;
-        private float _canFire;
 
         private float _horizontalInput;
         private float _verticalInput;
@@ -24,10 +24,14 @@ namespace Core.Player
         private const float BottomBoarder = -3.8f;
         private const float LeftBoarder = -11f;
         private const float RightBoarder = 11f;
+        private float _canFire;
+        private SpawnManager _spawnManager;
 
         private void Start()
         {
             InitPosition();
+            _spawnManager = GameObject.Find("/SpawnManager")?.GetComponent<SpawnManager>();
+
         }
 
         private void Update()
@@ -49,8 +53,15 @@ namespace Core.Player
             if (_lives >= 1)
                 return;
 
-            Debug.Log("Oops, I'm defeated");
-            Destroy(gameObject);
+            if (_spawnManager is null)
+            {
+                Debug.LogError("The spawn manager is null!");
+            }
+            else
+            {
+                _spawnManager.OnPlayerDeath();
+                Destroy(gameObject);
+            }
         }
 
         private void Shoot()

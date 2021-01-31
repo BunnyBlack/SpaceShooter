@@ -22,7 +22,7 @@ namespace Core.Enemy
             }
         }
 
-        private void ReSpawn()
+        public void ReSpawn()
         {
             var respawnPositionX = Random.Range(LeftBoarder, RightBoarder);
             var curPosition = gameObject.transform.position;
