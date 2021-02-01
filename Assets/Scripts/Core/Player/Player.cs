@@ -69,7 +69,7 @@ namespace Core.Player
             _canFire = Time.time + _coolDown;
 
             var curPosition = gameObject.transform.position;
-            var laserInitPosition = new Vector3(curPosition.x, curPosition.y + 0.8f, curPosition.z);
+            var laserInitPosition = new Vector3(curPosition.x, curPosition.y + 1.05f, curPosition.z);
             Instantiate(_laserPrefeb, laserInitPosition, Quaternion.identity);
         }
 
