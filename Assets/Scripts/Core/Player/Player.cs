@@ -15,6 +15,7 @@ namespace Core.Player
 
         [SerializeField] private float _speed = 5f;
         [SerializeField] private GameObject _laserPrefeb;
+        [SerializeField] private GameObject _tripleShotPrefeb;
         [SerializeField] private float _coolDown = 0.15f;
         [SerializeField] private int _lives = 3;
 
@@ -26,6 +27,7 @@ namespace Core.Player
         private const float RightBoarder = 11f;
         private float _canFire;
         private SpawnManager _spawnManager;
+        private bool _isTripleShotActive;
 
         private void Start()
         {
@@ -67,10 +69,17 @@ namespace Core.Player
         private void Shoot()
         {
             _canFire = Time.time + _coolDown;
-
+            
             var curPosition = gameObject.transform.position;
-            var laserInitPosition = new Vector3(curPosition.x, curPosition.y + 1.05f, curPosition.z);
-            Instantiate(_laserPrefeb, laserInitPosition, Quaternion.identity);
+            if (_isTripleShotActive)
+            {
+                Instantiate(_tripleShotPrefeb, curPosition, Quaternion.identity);
+            }
+            else
+            {
+                var laserInitPosition = new Vector3(curPosition.x, curPosition.y + 1.05f, curPosition.z);
+                Instantiate(_laserPrefeb, laserInitPosition, Quaternion.identity);
+            }
         }
 
         private void InitPosition()

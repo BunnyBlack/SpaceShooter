@@ -285,6 +285,8 @@ MonoBehaviour:
   _speed: 5
   _laserPrefeb: {fileID: 8123973713869616912, guid: 402951159628ee041801cd7622556b39,
     type: 3}
+  _tripleShotPrefeb: {fileID: 6567113579264529639, guid: 59bd250a5cc5a64429a11e42b78ec9e3,
+    type: 3}
   _coolDown: 0.15
   _lives: 3
 --- !u!212 &1002729511
