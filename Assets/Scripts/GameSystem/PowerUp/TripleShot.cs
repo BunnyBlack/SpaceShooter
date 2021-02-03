@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+﻿using Core.Player;
+using UnityEngine;
 
-namespace Core.Enemy
+namespace GameSystem.PowerUp
 {
-    public class Enemy : MonoBehaviour
+    public class TripleShot : MonoBehaviour
     {
-
         private const float BottomBoarder = -5.5f;
         private const float TopBoarder = 7f;
         private const float LeftBoarder = -9f;
         private const float RightBoarder = 9f;
-        [SerializeField] private float _speed = 4f;
+        [SerializeField] private float _speed = 3f;
 
         private void Update()
         {
@@ -21,17 +21,11 @@ namespace Core.Enemy
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            switch (other.tag)
-            {
-                case "Player":
-                    other.gameObject.GetComponent<Player.Player>()?.Damaged();
-                    Destroy(gameObject);
-                    break;
-                case "Laser":
-                    Destroy(other.gameObject);
-                    Destroy(gameObject);
-                    break;
-            }
+            if (!other.CompareTag("Player"))
+                return;
+
+            other.gameObject.GetComponent<Player>()?.TripleShotActive();
+            Destroy(gameObject);
         }
 
         public void ReSpawn()

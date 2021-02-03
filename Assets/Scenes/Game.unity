@@ -121,6 +121,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &212654902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 212654903}
+  m_Layer: 0
+  m_Name: PowerUpContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &212654903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212654902}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 478210232}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &261966593
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +265,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefeb: {fileID: 5652180356790286782, guid: d3b6bedadd8630c4abc7fbdf2bacd452,
     type: 3}
+  _powerUpTripleShotPrefeb: {fileID: 2518439385057385550, guid: 5fff504d40b7ebd4c8936ad06251e559,
+    type: 3}
   _enemyContainer: {fileID: 1825932775}
+  _powerUpContainer: {fileID: 212654902}
 --- !u!4 &478210232
 Transform:
   m_ObjectHideFlags: 0
@@ -248,6 +281,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1825932776}
+  - {fileID: 212654903}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -284,6 +318,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _laserPrefeb: {fileID: 8123973713869616912, guid: 402951159628ee041801cd7622556b39,
+    type: 3}
+  _tripleShotPrefeb: {fileID: 6567113579264529639, guid: 59bd250a5cc5a64429a11e42b78ec9e3,
     type: 3}
   _coolDown: 0.15
   _lives: 3
