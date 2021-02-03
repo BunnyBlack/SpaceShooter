@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using GameSystem.PowerUp;
 using UnityEngine;
 
 namespace Core.Enemy
@@ -6,7 +7,9 @@ namespace Core.Enemy
     public class SpawnManager : MonoBehaviour
     {
         [SerializeField] private GameObject _enemyPrefeb;
+        [SerializeField] private GameObject _powerUpTripleShotPrefeb;
         [SerializeField] private GameObject _enemyContainer;
+        [SerializeField] private GameObject _powerUpContainer;
         private bool _isEnemyPrefebNotNull;
 
         private bool _stopSpawning;
@@ -14,10 +17,11 @@ namespace Core.Enemy
         private void Start()
         {
             _isEnemyPrefebNotNull = _enemyPrefeb != null;
-            StartCoroutine(Spawn());
+            StartCoroutine(SpawnEnemy());
+            StartCoroutine(SpawnPowerUpTripleShot());
         }
 
-        private IEnumerator Spawn()
+        private IEnumerator SpawnEnemy()
         {
             while (!_stopSpawning)
             {
@@ -27,6 +31,19 @@ namespace Core.Enemy
                     enemy.GetComponent<Enemy>()?.ReSpawn();
                 }
                 yield return new WaitForSeconds(5);
+            }
+        }
+
+        private IEnumerator SpawnPowerUpTripleShot()
+        {
+            while (!_stopSpawning)
+            {
+                if (_isEnemyPrefebNotNull)
+                {
+                    var powerUpTripleShot = Instantiate(_powerUpTripleShotPrefeb, _powerUpContainer.transform, false);
+                    powerUpTripleShot.GetComponent<TripleShot>()?.ReSpawn();
+                }
+                yield return new WaitForSeconds(7);
             }
         }
 
