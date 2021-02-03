@@ -17,9 +17,7 @@ namespace Core.Player
             Move();
 
             if (gameObject.transform.position.y > 8f)
-            {
                 Destroy(gameObject);
-            }
         }
 
         private void Move()

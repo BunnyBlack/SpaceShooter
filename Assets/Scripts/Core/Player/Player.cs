@@ -1,16 +1,14 @@
 ﻿using Core.Enemy;
 using UnityEngine;
 
-
 namespace Core.Player
 {
     public class Player : MonoBehaviour
     {
-        public float Speed
-        {
-            get { return _speed; }
-            set { _speed = value; }
-        }
+        private const float TopBoarder = 0f;
+        private const float BottomBoarder = -3.8f;
+        private const float LeftBoarder = -11f;
+        private const float RightBoarder = 11f;
 
 
         [SerializeField] private float _speed = 5f;
@@ -18,16 +16,18 @@ namespace Core.Player
         [SerializeField] private GameObject _tripleShotPrefeb;
         [SerializeField] private float _coolDown = 0.15f;
         [SerializeField] private int _lives = 3;
+        private float _canFire;
 
         private float _horizontalInput;
-        private float _verticalInput;
-        private const float TopBoarder = 0f;
-        private const float BottomBoarder = -3.8f;
-        private const float LeftBoarder = -11f;
-        private const float RightBoarder = 11f;
-        private float _canFire;
-        private SpawnManager _spawnManager;
         private bool _isTripleShotActive;
+        private SpawnManager _spawnManager;
+        private float _verticalInput;
+
+        public float Speed
+        {
+            get { return _speed; }
+            set { _speed = value; }
+        }
 
         private void Start()
         {
@@ -41,9 +41,7 @@ namespace Core.Player
             Move();
 
             if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
-            {
                 Shoot();
-            }
 
         }
 
@@ -69,7 +67,7 @@ namespace Core.Player
         private void Shoot()
         {
             _canFire = Time.time + _coolDown;
-            
+
             var curPosition = gameObject.transform.position;
             if (_isTripleShotActive)
             {
@@ -104,13 +102,9 @@ namespace Core.Player
                 Mathf.Clamp(curPosition.y, BottomBoarder, TopBoarder), 0);
 
             if (gameObject.transform.position.x < LeftBoarder)
-            {
                 gameObject.transform.position = new Vector3(RightBoarder, curPosition.y, 0);
-            }
             else if (gameObject.transform.position.x > RightBoarder)
-            {
                 gameObject.transform.position = new Vector3(LeftBoarder, curPosition.y, 0);
-            }
         }
     }
 

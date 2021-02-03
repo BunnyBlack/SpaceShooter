@@ -7,9 +7,9 @@ namespace Core.Enemy
     {
         [SerializeField] private GameObject _enemyPrefeb;
         [SerializeField] private GameObject _enemyContainer;
+        private bool _isEnemyPrefebNotNull;
 
         private bool _stopSpawning;
-        private bool _isEnemyPrefebNotNull;
 
         private void Start()
         {
