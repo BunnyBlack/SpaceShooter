@@ -32,6 +32,7 @@ namespace GameSystem.PowerUp
                     Debug.Log("TripleShot");
                     break;
                 case 1:
+                    other.gameObject.GetComponent<Player>()?.SpeedUpActive();
                     Debug.Log("Speed Up");
                     break;
                 case 2:

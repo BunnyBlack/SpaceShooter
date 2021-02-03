@@ -7,7 +7,7 @@ namespace Core.Enemy
     public class SpawnManager : MonoBehaviour
     {
         [SerializeField] private GameObject _enemyPrefeb;
-        [SerializeField] private GameObject _powerUpTripleShotPrefeb;
+        [SerializeField] private GameObject[] _powerUpPrefebs;
         [SerializeField] private GameObject _enemyContainer;
         [SerializeField] private GameObject _powerUpContainer;
         private bool _isEnemyPrefebNotNull;
@@ -40,7 +40,8 @@ namespace Core.Enemy
             {
                 if (_isEnemyPrefebNotNull)
                 {
-                    var powerUpTripleShot = Instantiate(_powerUpTripleShotPrefeb, _powerUpContainer.transform, false);
+                    var randomPowerUp = Random.Range(0, 3);
+                    var powerUpTripleShot = Instantiate(_powerUpPrefebs[randomPowerUp], _powerUpContainer.transform, false);
                     powerUpTripleShot.GetComponent<PowerUp>()?.ReSpawn();
                 }
                 yield return new WaitForSeconds(7);
