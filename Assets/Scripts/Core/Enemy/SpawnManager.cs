@@ -41,7 +41,7 @@ namespace Core.Enemy
                 if (_isEnemyPrefebNotNull)
                 {
                     var powerUpTripleShot = Instantiate(_powerUpTripleShotPrefeb, _powerUpContainer.transform, false);
-                    powerUpTripleShot.GetComponent<TripleShot>()?.ReSpawn();
+                    powerUpTripleShot.GetComponent<PowerUp>()?.ReSpawn();
                 }
                 yield return new WaitForSeconds(7);
             }
