@@ -28,7 +28,6 @@ namespace Core.Enemy
                     Destroy(gameObject);
                     break;
                 case "Laser":
-                    Debug.Log("Hit by laser");
                     Destroy(other.gameObject);
                     Destroy(gameObject);
                     break;

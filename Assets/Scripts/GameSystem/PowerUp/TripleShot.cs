@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Core.Player;
+using UnityEngine;
 
 namespace GameSystem.PowerUp
 {
@@ -23,7 +24,7 @@ namespace GameSystem.PowerUp
             if (!other.CompareTag("Player"))
                 return;
 
-            Debug.Log("PowerUp: Triple Shot.");
+            other.gameObject.GetComponent<Player>()?.TripleShotActive();
             Destroy(gameObject);
         }
 

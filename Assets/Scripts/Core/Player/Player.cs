@@ -106,6 +106,19 @@ namespace Core.Player
             else if (gameObject.transform.position.x > RightBoarder)
                 gameObject.transform.position = new Vector3(LeftBoarder, curPosition.y, 0);
         }
+
+        public void TripleShotActive()
+        {
+            _isTripleShotActive = true;
+            Debug.Log("Power Up: Triple Shot");
+            Invoke(nameof(PowerDown), 5.0f);
+        }
+
+        private void PowerDown()
+        {
+            _isTripleShotActive = false;
+            Debug.Log("Power Down: Triple Shot");
+        }
     }
 
 }
