@@ -17,12 +17,16 @@ namespace Core.Player
         [SerializeField] private float _coolDown = 0.15f;
         [SerializeField] private int _lives = 3;
         
-        private float _canFire;
+        private SpawnManager _spawnManager;
+
         private float _horizontalInput;
+        private float _verticalInput;
+
+        private float _canFire;
         private bool _isTripleShotActive;
         private bool _isSpeedUp;
-        private SpawnManager _spawnManager;
-        private float _verticalInput;
+        private bool _isShieldOn;
+        
 
         public float Speed
         {
@@ -48,6 +52,13 @@ namespace Core.Player
 
         public void Damaged()
         {
+            if (_isShieldOn)
+            {
+                ShieldOn(false);
+                Debug.Log("Shield Breaks");
+                return;
+            }
+            
             _lives--;
 
             Debug.Log($"Live:{_lives}");
@@ -121,6 +132,11 @@ namespace Core.Player
             _speed = 8.5f;
             Debug.Log("Power Up: Speed Up");
             Invoke(nameof(SpeedDown), 5.0f);
+        }
+
+        public void ShieldOn(bool isOn)
+        {
+            _isShieldOn = true;
         }
 
         private void PowerDown()

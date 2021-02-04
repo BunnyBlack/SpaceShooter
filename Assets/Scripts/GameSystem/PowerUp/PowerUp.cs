@@ -36,6 +36,7 @@ namespace GameSystem.PowerUp
                     Debug.Log("Speed Up");
                     break;
                 case 2:
+                    other.gameObject.GetComponent<Player>()?.ShieldOn(true);
                     Debug.Log("Shield On");
                     break;
             }
