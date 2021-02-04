@@ -1,6 +1,5 @@
 ﻿using Core.Enemy;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Core.Player
 {
@@ -18,18 +17,18 @@ namespace Core.Player
         [SerializeField] private GameObject _shieldObj;
         [SerializeField] private float _coolDown = 0.15f;
         [SerializeField] private int _lives = 3;
-        
-        
-        private SpawnManager _spawnManager;
-
-        private float _horizontalInput;
-        private float _verticalInput;
 
         private float _canFire;
-        private bool _isTripleShotActive;
-        private bool _isSpeedUp;
+
+        private float _horizontalInput;
         private bool _isShieldOn;
-        
+        private bool _isSpeedUp;
+        private bool _isTripleShotActive;
+
+
+        private SpawnManager _spawnManager;
+        private float _verticalInput;
+
 
         public float Speed
         {
@@ -61,7 +60,7 @@ namespace Core.Player
                 Debug.Log("Shield Breaks");
                 return;
             }
-            
+
             _lives--;
 
             Debug.Log($"Live:{_lives}");
