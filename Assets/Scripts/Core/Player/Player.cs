@@ -1,5 +1,6 @@
 ﻿using Core.Enemy;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Core.Player
 {
@@ -14,8 +15,10 @@ namespace Core.Player
         [SerializeField] private float _speed = 5f;
         [SerializeField] private GameObject _laserPrefeb;
         [SerializeField] private GameObject _tripleShotPrefeb;
+        [SerializeField] private GameObject _shieldObj;
         [SerializeField] private float _coolDown = 0.15f;
         [SerializeField] private int _lives = 3;
+        
         
         private SpawnManager _spawnManager;
 
@@ -38,7 +41,7 @@ namespace Core.Player
         {
             InitPosition();
             _spawnManager = GameObject.Find("/SpawnManager")?.GetComponent<SpawnManager>();
-
+            ShieldOn(false);
         }
 
         private void Update()
@@ -136,7 +139,8 @@ namespace Core.Player
 
         public void ShieldOn(bool isOn)
         {
-            _isShieldOn = true;
+            _isShieldOn = isOn;
+            _shieldObj.SetActive(isOn);
         }
 
         private void PowerDown()
