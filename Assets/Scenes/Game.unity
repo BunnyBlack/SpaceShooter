@@ -265,8 +265,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefeb: {fileID: 5652180356790286782, guid: d3b6bedadd8630c4abc7fbdf2bacd452,
     type: 3}
-  _powerUpTripleShotPrefeb: {fileID: 2518439385057385550, guid: 5fff504d40b7ebd4c8936ad06251e559,
-    type: 3}
+  _powerUpPrefebs:
+  - {fileID: 2518439385057385550, guid: 5fff504d40b7ebd4c8936ad06251e559, type: 3}
+  - {fileID: 4915781593530031097, guid: b827d6b04d4ddeb4d9b20f0de86f2bf4, type: 3}
+  - {fileID: 2518439385057385550, guid: 5fff504d40b7ebd4c8936ad06251e559, type: 3}
   _enemyContainer: {fileID: 1825932775}
   _powerUpContainer: {fileID: 212654902}
 --- !u!4 &478210232

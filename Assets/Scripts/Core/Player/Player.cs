@@ -16,10 +16,11 @@ namespace Core.Player
         [SerializeField] private GameObject _tripleShotPrefeb;
         [SerializeField] private float _coolDown = 0.15f;
         [SerializeField] private int _lives = 3;
+        
         private float _canFire;
-
         private float _horizontalInput;
         private bool _isTripleShotActive;
+        private bool _isSpeedUp;
         private SpawnManager _spawnManager;
         private float _verticalInput;
 
@@ -114,10 +115,25 @@ namespace Core.Player
             Invoke(nameof(PowerDown), 5.0f);
         }
 
+        public void SpeedUpActive()
+        {
+            _isSpeedUp = true;
+            _speed = 8.5f;
+            Debug.Log("Power Up: Speed Up");
+            Invoke(nameof(SpeedDown), 5.0f);
+        }
+
         private void PowerDown()
         {
             _isTripleShotActive = false;
             Debug.Log("Power Down: Triple Shot");
+        }
+
+        private void SpeedDown()
+        {
+            _isSpeedUp = false;
+            _speed = 5f;
+            Debug.Log("Power Down: Speed up");
         }
     }
 
