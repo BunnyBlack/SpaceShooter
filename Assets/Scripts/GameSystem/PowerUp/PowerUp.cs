@@ -9,9 +9,12 @@ namespace GameSystem.PowerUp
         private const float TopBoarder = 7f;
         private const float LeftBoarder = -9f;
         private const float RightBoarder = 9f;
+
         [SerializeField] private float _speed = 3f;
+
         // 0 triple shot  1 speed up  2 shield
         [SerializeField] private int _powerUpId;
+
         private void Update()
         {
             MoveDown();
@@ -29,15 +32,12 @@ namespace GameSystem.PowerUp
             {
                 case 0:
                     other.gameObject.GetComponent<Player>()?.TripleShotActive();
-                    Debug.Log("TripleShot");
                     break;
                 case 1:
                     other.gameObject.GetComponent<Player>()?.SpeedUpActive();
-                    Debug.Log("Speed Up");
                     break;
                 case 2:
                     other.gameObject.GetComponent<Player>()?.ShieldOn(true);
-                    Debug.Log("Shield On");
                     break;
             }
             Destroy(gameObject);

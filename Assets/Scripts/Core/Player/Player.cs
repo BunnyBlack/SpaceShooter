@@ -1,6 +1,5 @@
 ﻿using Core.Enemy;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Core.Player
 {
@@ -18,18 +17,20 @@ namespace Core.Player
         [SerializeField] private GameObject _shieldObj;
         [SerializeField] private float _coolDown = 0.15f;
         [SerializeField] private int _lives = 3;
-        
-        
-        private SpawnManager _spawnManager;
-
-        private float _horizontalInput;
-        private float _verticalInput;
 
         private float _canFire;
-        private bool _isTripleShotActive;
-        private bool _isSpeedUp;
+
+        private float _horizontalInput;
         private bool _isShieldOn;
-        
+        private bool _isSpeedUp;
+        private bool _isTripleShotActive;
+        private int _score;
+
+
+        private SpawnManager _spawnManager;
+        private UIManager.UIManager _uiManager;
+        private float _verticalInput;
+
 
         public float Speed
         {
@@ -41,6 +42,7 @@ namespace Core.Player
         {
             InitPosition();
             _spawnManager = GameObject.Find("/SpawnManager")?.GetComponent<SpawnManager>();
+            _uiManager = GameObject.Find("/Canvas")?.GetComponent<UIManager.UIManager>();
             ShieldOn(false);
         }
 
@@ -58,13 +60,12 @@ namespace Core.Player
             if (_isShieldOn)
             {
                 ShieldOn(false);
-                Debug.Log("Shield Breaks");
                 return;
             }
-            
-            _lives--;
 
-            Debug.Log($"Live:{_lives}");
+            _lives--;
+            _uiManager.UpdateLiveImage(_lives);
+
             if (_lives >= 1)
                 return;
 
@@ -77,6 +78,33 @@ namespace Core.Player
                 _spawnManager.OnPlayerDeath();
                 Destroy(gameObject);
             }
+        }
+
+        public void TripleShotActive()
+        {
+            _isTripleShotActive = true;
+            Debug.Log("Power Up: Triple Shot");
+            Invoke(nameof(PowerDown), 5.0f);
+        }
+
+        public void SpeedUpActive()
+        {
+            _isSpeedUp = true;
+            _speed = 8.5f;
+            Debug.Log("Power Up: Speed Up");
+            Invoke(nameof(SpeedDown), 5.0f);
+        }
+
+        public void ShieldOn(bool isOn)
+        {
+            _isShieldOn = isOn;
+            _shieldObj.SetActive(isOn);
+        }
+
+        public void AddScore()
+        {
+            _score += 10;
+            _uiManager.UpdateScore(_score);
         }
 
         private void Shoot()
@@ -120,27 +148,6 @@ namespace Core.Player
                 gameObject.transform.position = new Vector3(RightBoarder, curPosition.y, 0);
             else if (gameObject.transform.position.x > RightBoarder)
                 gameObject.transform.position = new Vector3(LeftBoarder, curPosition.y, 0);
-        }
-
-        public void TripleShotActive()
-        {
-            _isTripleShotActive = true;
-            Debug.Log("Power Up: Triple Shot");
-            Invoke(nameof(PowerDown), 5.0f);
-        }
-
-        public void SpeedUpActive()
-        {
-            _isSpeedUp = true;
-            _speed = 8.5f;
-            Debug.Log("Power Up: Speed Up");
-            Invoke(nameof(SpeedDown), 5.0f);
-        }
-
-        public void ShieldOn(bool isOn)
-        {
-            _isShieldOn = isOn;
-            _shieldObj.SetActive(isOn);
         }
 
         private void PowerDown()
