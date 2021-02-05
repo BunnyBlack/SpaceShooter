@@ -14,6 +14,7 @@ namespace Core.UIManager
         [SerializeField] private GameObject _restartObj;
 
         private bool _gameOver;
+
         private void Start()
         {
             _liveImage.sprite = _liveSprites[3];
@@ -25,9 +26,7 @@ namespace Core.UIManager
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.R) && _gameOver)
-            {
                 SceneManager.LoadScene("Scenes/Game");
-            }
         }
 
         public void UpdateScore(int score)
@@ -58,6 +57,7 @@ namespace Core.UIManager
             {
                 _gameOverObj.SetActive(true);
                 yield return new WaitForSeconds(0.5f);
+
                 _gameOverObj.SetActive(false);
                 yield return new WaitForSeconds(0.5f);
             }
