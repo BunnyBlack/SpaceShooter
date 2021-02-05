@@ -51,7 +51,6 @@ namespace Core.Enemy
         public void OnPlayerDeath()
         {
             _stopSpawning = true;
-            Debug.Log("Oops, I'm defeated.");
         }
     }
 }

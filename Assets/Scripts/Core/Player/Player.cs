@@ -60,13 +60,12 @@ namespace Core.Player
             if (_isShieldOn)
             {
                 ShieldOn(false);
-                Debug.Log("Shield Breaks");
                 return;
             }
 
             _lives--;
             _uiManager.UpdateLiveImage(_lives);
-            
+
             if (_lives >= 1)
                 return;
 

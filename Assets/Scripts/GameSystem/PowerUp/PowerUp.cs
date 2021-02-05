@@ -32,15 +32,12 @@ namespace GameSystem.PowerUp
             {
                 case 0:
                     other.gameObject.GetComponent<Player>()?.TripleShotActive();
-                    Debug.Log("TripleShot");
                     break;
                 case 1:
                     other.gameObject.GetComponent<Player>()?.SpeedUpActive();
-                    Debug.Log("Speed Up");
                     break;
                 case 2:
                     other.gameObject.GetComponent<Player>()?.ShieldOn(true);
-                    Debug.Log("Shield On");
                     break;
             }
             Destroy(gameObject);
