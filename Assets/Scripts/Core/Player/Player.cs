@@ -65,8 +65,8 @@ namespace Core.Player
             }
 
             _lives--;
-
-            Debug.Log($"Live:{_lives}");
+            _uiManager.UpdateLiveImage(_lives);
+            
             if (_lives >= 1)
                 return;
 
