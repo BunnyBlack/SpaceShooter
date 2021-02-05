@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Core.UIManager
@@ -26,7 +27,18 @@ namespace Core.UIManager
         {
             _liveImage.sprite = _liveSprites[currentLives];
             if (currentLives < 1)
+                StartCoroutine(GameOverFlickerRoutine());
+        }
+
+        private IEnumerator GameOverFlickerRoutine()
+        {
+            while (true)
+            {
                 _gameOverObj.SetActive(true);
+                yield return new WaitForSeconds(0.5f);
+                _gameOverObj.SetActive(false);
+                yield return new WaitForSeconds(0.5f);
+            }
         }
     }
 }

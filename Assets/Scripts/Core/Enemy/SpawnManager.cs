@@ -17,11 +17,11 @@ namespace Core.Enemy
         private void Start()
         {
             _isEnemyPrefebNotNull = _enemyPrefeb != null;
-            StartCoroutine(SpawnEnemy());
-            StartCoroutine(SpawnPowerUpTripleShot());
+            StartCoroutine(SpawnEnemyRoutine());
+            StartCoroutine(SpawnPowerUpTripleShotRoutine());
         }
 
-        private IEnumerator SpawnEnemy()
+        private IEnumerator SpawnEnemyRoutine()
         {
             while (!_stopSpawning)
             {
@@ -34,7 +34,7 @@ namespace Core.Enemy
             }
         }
 
-        private IEnumerator SpawnPowerUpTripleShot()
+        private IEnumerator SpawnPowerUpTripleShotRoutine()
         {
             while (!_stopSpawning)
             {
