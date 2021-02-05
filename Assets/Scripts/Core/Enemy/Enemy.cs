@@ -10,6 +10,12 @@ namespace Core.Enemy
         private const float LeftBoarder = -9f;
         private const float RightBoarder = 9f;
         [SerializeField] private float _speed = 4f;
+        private Player.Player _player;
+
+        private void Start()
+        {
+            _player = GameObject.Find("/Player")?.GetComponent<Player.Player>();
+        }
 
         private void Update()
         {
@@ -29,6 +35,7 @@ namespace Core.Enemy
                     break;
                 case "Laser":
                     Destroy(other.gameObject);
+                    _player.AddScore();
                     Destroy(gameObject);
                     break;
             }
