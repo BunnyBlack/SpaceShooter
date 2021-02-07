@@ -14,8 +14,9 @@ namespace Core.Enemy
 
         private bool _stopSpawning;
 
-        private void Start()
+        public void StartSpawning()
         {
+
             _isEnemyPrefebNotNull = _enemyPrefeb != null;
             StartCoroutine(SpawnEnemyRoutine());
             StartCoroutine(SpawnPowerUpTripleShotRoutine());
@@ -23,6 +24,8 @@ namespace Core.Enemy
 
         private IEnumerator SpawnEnemyRoutine()
         {
+            yield return new WaitForSeconds(3f);
+
             while (!_stopSpawning)
             {
                 if (_isEnemyPrefebNotNull)
@@ -36,6 +39,8 @@ namespace Core.Enemy
 
         private IEnumerator SpawnPowerUpTripleShotRoutine()
         {
+            yield return new WaitForSeconds(3f);
+
             while (!_stopSpawning)
             {
                 if (_isEnemyPrefebNotNull)
