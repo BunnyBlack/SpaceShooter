@@ -9,12 +9,15 @@ namespace Core.Enemy
         private const float TopBoarder = 7f;
         private const float LeftBoarder = -9f;
         private const float RightBoarder = 9f;
+        private static readonly int OnEnemyDeath = Animator.StringToHash("OnEnemyDeath");
         [SerializeField] private float _speed = 4f;
+        private Animator _animator;
         private Player.Player _player;
 
         private void Start()
         {
             _player = GameObject.Find("/Player")?.GetComponent<Player.Player>();
+            _animator = gameObject.GetComponent<Animator>();
         }
 
         private void Update()
@@ -31,12 +34,18 @@ namespace Core.Enemy
             {
                 case "Player":
                     other.gameObject.GetComponent<Player.Player>()?.Damaged();
-                    Destroy(gameObject);
+                    _animator.SetTrigger(OnEnemyDeath);
+                    _speed = 0;
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    Destroy(gameObject, 2.8f);
                     break;
                 case "Laser":
                     Destroy(other.gameObject);
                     _player.AddScore();
-                    Destroy(gameObject);
+                    _animator.SetTrigger(OnEnemyDeath);
+                    _speed = 0;
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    Destroy(gameObject, 2.8f);
                     break;
             }
         }
