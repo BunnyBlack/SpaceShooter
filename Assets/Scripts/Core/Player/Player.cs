@@ -1,5 +1,6 @@
 ﻿using Core.Enemy;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Core.Player
 {
@@ -17,7 +18,7 @@ namespace Core.Player
         [SerializeField] private GameObject _shieldObj;
         [SerializeField] private float _coolDown = 0.15f;
         [SerializeField] private int _lives = 3;
-        [SerializeField] private GameObject[] _hurtObjects;
+        [SerializeField] private GameObject[] _hurtPosition;
 
         private float _canFire;
 
@@ -42,7 +43,7 @@ namespace Core.Player
         private void Start()
         {
             InitPosition();
-            if (_hurtObjects.Length != _lives - 1)
+            if (_hurtPosition.Length != _lives - 1)
                 Debug.LogError("Length of _hurtObjects must equal to _lives - 1!");
             else
                 InitHurtPosition();
@@ -74,7 +75,7 @@ namespace Core.Player
             // 数组的下标从 0 开始，因此枚举也要减 1
             if (_lives > 0)
             {
-                _hurtObjects[_hurtPositionArray[_lives - 1]].SetActive(true);
+                _hurtPosition[_hurtPositionArray[_lives - 1]].SetActive(true);
             }
             else
             {

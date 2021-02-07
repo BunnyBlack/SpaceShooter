@@ -606,10 +606,9 @@ MonoBehaviour:
   _shieldObj: {fileID: 1677531849}
   _coolDown: 0.15
   _lives: 3
-  _hurtObjects:
+  _hurtPosition:
   - {fileID: 6802244227808216669}
   - {fileID: 1352705154}
-  _hurtPositionArray: 
 --- !u!212 &1002729511
 SpriteRenderer:
   m_ObjectHideFlags: 0
