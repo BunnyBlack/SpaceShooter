@@ -17,15 +17,16 @@ namespace Core.Player
         [SerializeField] private GameObject _shieldObj;
         [SerializeField] private float _coolDown = 0.15f;
         [SerializeField] private int _lives = 3;
+        [SerializeField] private GameObject[] _hurtPosition;
 
         private float _canFire;
 
         private float _horizontalInput;
+        private int[] _hurtPositionArray;
         private bool _isShieldOn;
         private bool _isSpeedUp;
         private bool _isTripleShotActive;
         private int _score;
-
 
         private SpawnManager _spawnManager;
         private UIManager.UIManager _uiManager;
@@ -41,10 +42,15 @@ namespace Core.Player
         private void Start()
         {
             InitPosition();
+            if (_hurtPosition.Length != _lives - 1)
+                Debug.LogError("Length of _hurtObjects must equal to _lives - 1!");
+            else
+                InitHurtPosition();
             _spawnManager = GameObject.Find("/SpawnManager")?.GetComponent<SpawnManager>();
             _uiManager = GameObject.Find("/Canvas")?.GetComponent<UIManager.UIManager>();
             ShieldOn(false);
         }
+
 
         private void Update()
         {
@@ -65,18 +71,22 @@ namespace Core.Player
 
             _lives--;
             _uiManager.UpdateLiveImage(_lives);
-
-            if (_lives >= 1)
-                return;
-
-            if (_spawnManager is null)
+            // 数组的下标从 0 开始，因此枚举也要减 1
+            if (_lives > 0)
             {
-                Debug.LogError("The spawn manager is null!");
+                _hurtPosition[_hurtPositionArray[_lives - 1]].SetActive(true);
             }
             else
             {
-                _spawnManager.OnPlayerDeath();
-                Destroy(gameObject);
+                if (_spawnManager is null)
+                {
+                    Debug.LogError("The spawn manager is null!");
+                }
+                else
+                {
+                    _spawnManager.OnPlayerDeath();
+                    Destroy(gameObject);
+                }
             }
         }
 
@@ -126,6 +136,26 @@ namespace Core.Player
         private void InitPosition()
         {
             gameObject.transform.position = new Vector3(0, 0, 0);
+        }
+
+        private void InitHurtPosition()
+        {
+            _hurtPositionArray = new int[_lives - 1];
+            for (var i = 0; i < _hurtPositionArray.Length; i++)
+                _hurtPositionArray[i] = i;
+            Shuffle();
+        }
+
+        private void Shuffle()
+        {
+            // Knuth-Durstenfeld Shuffle
+            for (var i = _hurtPositionArray.Length - 1; i >= 0; i--)
+            {
+                var randomNum = Random.Range(0, i + 1);
+                var temp = _hurtPositionArray[randomNum];
+                _hurtPositionArray[randomNum] = _hurtPositionArray[i];
+                _hurtPositionArray[i] = temp;
+            }
         }
 
         private void Move()

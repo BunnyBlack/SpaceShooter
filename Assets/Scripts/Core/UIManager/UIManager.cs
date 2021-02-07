@@ -19,6 +19,8 @@ namespace Core.UIManager
         {
             _liveImage.sprite = _liveSprites[3];
             _scoreText.text = "Score: 0";
+            _liveImage.gameObject.SetActive(false);
+            _scoreText.gameObject.SetActive(false);
             _gameOverObj.SetActive(false);
             _restartObj.SetActive(false);
         }
@@ -27,6 +29,19 @@ namespace Core.UIManager
         {
             if (Input.GetKeyDown(KeyCode.R) && _gameOver)
                 SceneManager.LoadScene("Scenes/Game");
+        }
+
+        public void ShowHub()
+        {
+            StartCoroutine(ShowHubRoutine());
+        }
+
+        public IEnumerator ShowHubRoutine()
+        {
+            yield return new WaitForSeconds(2.5f);
+
+            _liveImage.gameObject.SetActive(true);
+            _scoreText.gameObject.SetActive(true);
         }
 
         public void UpdateScore(int score)
