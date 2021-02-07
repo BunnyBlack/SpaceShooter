@@ -1,6 +1,5 @@
 ﻿using Core.Enemy;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Core.Player
 {

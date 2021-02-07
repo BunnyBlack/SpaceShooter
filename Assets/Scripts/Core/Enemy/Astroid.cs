@@ -8,10 +8,12 @@ namespace Core.Enemy
         [SerializeField] private GameObject _explosionObj;
 
         private SpawnManager _spawnManager;
+        private UIManager.UIManager _uiManager;
 
         private void Start()
         {
             _spawnManager = GameObject.Find("/SpawnManager")?.GetComponent<SpawnManager>();
+            _uiManager = GameObject.Find("/Canvas")?.GetComponent<UIManager.UIManager>();
         }
 
         private void Update()
@@ -28,6 +30,7 @@ namespace Core.Enemy
             Instantiate(_explosionObj, gameObject.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
             _spawnManager.StartSpawning();
+            _uiManager.ShowHub();
             Destroy(gameObject, 0.25f);
         }
     }

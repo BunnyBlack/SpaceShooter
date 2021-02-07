@@ -16,7 +16,6 @@ namespace Core.Enemy
 
         public void StartSpawning()
         {
-
             _isEnemyPrefebNotNull = _enemyPrefeb != null;
             StartCoroutine(SpawnEnemyRoutine());
             StartCoroutine(SpawnPowerUpTripleShotRoutine());
