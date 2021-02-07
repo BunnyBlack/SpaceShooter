@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateSpeed: 3
+  _explosionObj: {fileID: 1003112932741163869, guid: 4ad97f9e5b9af5d46bc2db3dcf16b0ae,
+    type: 3}
 --- !u!50 &1466438686
 Rigidbody2D:
   serializedVersion: 4
