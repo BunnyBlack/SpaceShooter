@@ -6,7 +6,7 @@ namespace Core.Enemy
     {
         [SerializeField] private AudioClip _explosionAudioClip;
         private AudioSource _audioSource;
-        
+
         private void Start()
         {
             _audioSource = GetComponent<AudioSource>();

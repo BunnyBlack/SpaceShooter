@@ -13,8 +13,8 @@ namespace Core.Enemy
         [SerializeField] private float _speed = 4f;
         [SerializeField] private AudioClip _explosionAudioClip;
         private Animator _animator;
-        private Player.Player _player;
         private AudioSource _audioSource;
+        private Player.Player _player;
 
         private void Start()
         {
@@ -37,22 +37,29 @@ namespace Core.Enemy
             {
                 case "Player":
                     other.gameObject.GetComponent<Player.Player>()?.Damaged();
-                    _animator.SetTrigger(OnEnemyDeath);
-                    _speed = 0;
-                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                    _audioSource.PlayOneShot(_explosionAudioClip);
+
+                    OnDestroySelf();
+
                     Destroy(gameObject, 2.8f);
                     break;
                 case "Laser":
                     Destroy(other.gameObject);
                     _player.AddScore();
-                    _animator.SetTrigger(OnEnemyDeath);
-                    _speed = 0;
-                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                    _audioSource.PlayOneShot(_explosionAudioClip);
+
+                    OnDestroySelf();
+
                     Destroy(gameObject, 2.8f);
                     break;
             }
+        }
+
+        private void OnDestroySelf()
+        {
+
+            _animator.SetTrigger(OnEnemyDeath);
+            _speed = 0;
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            _audioSource.PlayOneShot(_explosionAudioClip);
         }
 
         public void ReSpawn()
