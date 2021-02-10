@@ -19,6 +19,7 @@ namespace Core.Player
         [SerializeField] private int _lives = 3;
         [SerializeField] private GameObject[] _hurtPosition;
         [SerializeField] private AudioClip _laserAudioClip;
+        [SerializeField] private AudioClip _powerUpAudioClip;
         private AudioSource _audioSource;
 
         private float _canFire;
@@ -121,6 +122,11 @@ namespace Core.Player
         {
             _score += 10;
             _uiManager.UpdateScore(_score);
+        }
+
+        public void PlayPowerUpSound()
+        {
+            _audioSource.PlayOneShot(_powerUpAudioClip);
         }
 
         private void Shoot()

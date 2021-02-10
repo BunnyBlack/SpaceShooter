@@ -28,6 +28,8 @@ namespace GameSystem.PowerUp
             if (!other.CompareTag("Player"))
                 return;
 
+            other.gameObject.GetComponent<Player>()?.PlayPowerUpSound();
+
             switch (_powerUpId)
             {
                 case 0:
@@ -40,6 +42,7 @@ namespace GameSystem.PowerUp
                     other.gameObject.GetComponent<Player>()?.ShieldOn(true);
                     break;
             }
+            
             Destroy(gameObject);
         }
 
