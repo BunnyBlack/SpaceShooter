@@ -18,6 +18,9 @@ namespace Core.Player
         [SerializeField] private float _coolDown = 0.15f;
         [SerializeField] private int _lives = 3;
         [SerializeField] private GameObject[] _hurtPosition;
+        [SerializeField] private AudioClip _laserAudioClip;
+        [SerializeField] private AudioClip _powerUpAudioClip;
+        private AudioSource _audioSource;
 
         private float _canFire;
 
@@ -42,12 +45,16 @@ namespace Core.Player
         private void Start()
         {
             InitPosition();
+
             if (_hurtPosition.Length != _lives - 1)
                 Debug.LogError("Length of _hurtObjects must equal to _lives - 1!");
             else
                 InitHurtPosition();
+
             _spawnManager = GameObject.Find("/SpawnManager")?.GetComponent<SpawnManager>();
             _uiManager = GameObject.Find("/Canvas")?.GetComponent<UIManager.UIManager>();
+            _audioSource = gameObject.GetComponent<AudioSource>();
+
             ShieldOn(false);
         }
 
@@ -117,6 +124,11 @@ namespace Core.Player
             _uiManager.UpdateScore(_score);
         }
 
+        public void PlayPowerUpSound()
+        {
+            _audioSource.PlayOneShot(_powerUpAudioClip);
+        }
+
         private void Shoot()
         {
             _canFire = Time.time + _coolDown;
@@ -131,6 +143,8 @@ namespace Core.Player
                 var laserInitPosition = new Vector3(curPosition.x, curPosition.y + 1.05f, curPosition.z);
                 Instantiate(_laserPrefeb, laserInitPosition, Quaternion.identity);
             }
+
+            _audioSource.PlayOneShot(_laserAudioClip);
         }
 
         private void InitPosition()
