@@ -42,7 +42,7 @@ namespace GameSystem.PowerUp
                     other.gameObject.GetComponent<Player>()?.ShieldOn(true);
                     break;
             }
-            
+
             Destroy(gameObject);
         }
 
