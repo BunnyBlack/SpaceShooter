@@ -11,13 +11,16 @@ namespace Core.Enemy
         private const float RightBoarder = 9f;
         private static readonly int OnEnemyDeath = Animator.StringToHash("OnEnemyDeath");
         [SerializeField] private float _speed = 4f;
+        [SerializeField] private AudioClip _explosionAudioClip;
         private Animator _animator;
         private Player.Player _player;
+        private AudioSource _audioSource;
 
         private void Start()
         {
             _player = GameObject.Find("/Player")?.GetComponent<Player.Player>();
             _animator = gameObject.GetComponent<Animator>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -37,6 +40,7 @@ namespace Core.Enemy
                     _animator.SetTrigger(OnEnemyDeath);
                     _speed = 0;
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    _audioSource.PlayOneShot(_explosionAudioClip);
                     Destroy(gameObject, 2.8f);
                     break;
                 case "Laser":
@@ -45,6 +49,7 @@ namespace Core.Enemy
                     _animator.SetTrigger(OnEnemyDeath);
                     _speed = 0;
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    _audioSource.PlayOneShot(_explosionAudioClip);
                     Destroy(gameObject, 2.8f);
                     break;
             }
